@@ -1,0 +1,21 @@
+
+Resize
+https://phaser.discourse.group/t/phaser3-fillscreen-and-position-stuff-on-top-bottom-etc/9960
+https://www.joshmorony.com/how-to-scale-a-game-for-all-device-sizes-in-phaser/
+
+mongo
+username: skwerd_user
+password: gcTyZxplWi1redWV
+
+
+cookies
+https://www.section.io/engineering-education/what-are-cookies-nodejs/
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie
+https://www.digitalocean.com/community/tutorials/api-authentication-with-json-web-tokensjwt-and-passport
+
+audio
+https://blog.ourcade.co/posts/2020/phaser-3-web-audio-best-practices-games/
+https://www.npmjs.com/package/soundcloud-audio
+
+fix orientation
+https://www.emanueleferonato.com/2015/04/23/how-to-lock-orientation-in-your-html5-responsive-game-using-phaser/
