@@ -37,6 +37,17 @@ export default class PlayerScene extends Phaser.Scene {
     // Stop sound pausing when loose focus, will this work for all OS?
     this.sound.pauseOnBlur = false;
 
+
+    document.getElementById('instructions').addEventListener('click', () =>
+      this.launchMenuScene('MenuScene', 'how_to_play')
+    );
+    document.getElementById('stats').addEventListener('click', () =>
+      this.launchMenuScene('MenuScene', 'stats')
+    );
+    document.getElementById('leaderboard').addEventListener('click', () =>
+      this.launchMenuScene('MenuScene', 'high_scores')
+    );
+
     this.addMenuBars();
     this.pauseGame();
 
