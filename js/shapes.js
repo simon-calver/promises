@@ -187,7 +187,7 @@ class MysteriousShape extends Phaser.GameObjects.Polygon {
       'particles',
       {
         frame: frames[this.id],
-        moveToX: gameCanvas.width - 20 - playerScene.scoreText.width / 2,
+        moveToX: gameCanvas.width / 2,
         moveToY: 20,
         angle: { start: 0, end: 360, steps: 32 },
         quantity: 10,

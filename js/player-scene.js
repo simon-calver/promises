@@ -7,6 +7,8 @@ export default class PlayerScene extends Phaser.Scene {
   preload() {
     this.load.image('menu-top', 'assets/images/backgrounds/menu-top.png');
     this.load.image('menu-middle', 'assets/images/backgrounds/menu-middle.png');
+    this.load.image('score-background', 'assets/images/backgrounds/score-background.png');
+
     this.load.bitmapFont('mont', `assets/fonts/mont-heavy/mont-heavy.png`, `assets/fonts/mont-heavy/mont-heavy.xml`);
     this.load.bitmapFont('mont-light', `assets/fonts/mont-light/mont-light.png`, `assets/fonts/mont-light/mont-light.xml`);
     this.load.multiatlas('icons', 'assets/images/icons/icons.json', 'assets/images/icons');
@@ -48,6 +50,19 @@ export default class PlayerScene extends Phaser.Scene {
       this.launchMenuScene('MenuScene', 'high_scores')
     );
 
+    // stop from being interactive when menu has been clicked
+    // TODO how reliable is this?
+    document.getElementById('menu').addEventListener('click', function () {
+      var x = document.getElementById("menu-items");
+      if (x.style.display === "block") {
+        this.scene.pause();
+        this.pauseGame();
+      } else {
+        this.scene.resume();
+        this.resumeGame()
+      }
+    }.bind(this));
+
     this.addMenuBars();
     this.pauseGame();
 
@@ -86,22 +101,22 @@ export default class PlayerScene extends Phaser.Scene {
   addMenuBars() {
     let { width, height } = this.sys.game.canvas;
 
-    this.add.rectangle(0, 0, width, 40, 0x000000).setOrigin(0, 0);
+    // this.add.rectangle(0, 0, width, 40, 0x000000).setOrigin(0, 0);
 
-    let howToPlayIcon = this.add.image(0, 20, 'icons', 'question.png').setOrigin(0, 0.5).setScale(0.5).setInteractive();
-    let scoreIcon = this.add.image(40, 20, 'icons', 'star.png').setOrigin(0, 0.5).setScale(0.5).setInteractive();
-    let highScoresIcon = this.add.image(80, 20, 'icons', 'leaderboardsComplex.png').setOrigin(0, 0.5).setScale(0.5).setInteractive();
+    // let howToPlayIcon = this.add.image(0, 20, 'icons', 'question.png').setOrigin(0, 0.5).setScale(0.5).setInteractive();
+    // let scoreIcon = this.add.image(40, 20, 'icons', 'star.png').setOrigin(0, 0.5).setScale(0.5).setInteractive();
+    // let highScoresIcon = this.add.image(80, 20, 'icons', 'leaderboardsComplex.png').setOrigin(0, 0.5).setScale(0.5).setInteractive();
 
-    scoreIcon.on('pointerdown', () => this.launchMenuScene('MenuScene', 'stats'));
-    howToPlayIcon.on('pointerdown', () => this.launchMenuScene('MenuScene', 'how_to_play'));
-    highScoresIcon.on('pointerdown', () => this.launchMenuScene('MenuScene', 'high_scores'));
+    // scoreIcon.on('pointerdown', () => this.launchMenuScene('MenuScene', 'stats'));
+    // howToPlayIcon.on('pointerdown', () => this.launchMenuScene('MenuScene', 'how_to_play'));
+    // highScoresIcon.on('pointerdown', () => this.launchMenuScene('MenuScene', 'high_scores'));
 
     this.add.rectangle(0, height - 40, width, 40, 0x000000).setOrigin(0, 0);
     let restartIcon = this.add.image(0, height - 20, 'icons', 'return.png').setOrigin(0, 0.5).setScale(0.5).setInteractive();
     this.playIcon = this.add.image(40, height - 20, 'icons', 'right.png').setOrigin(0, 0.5).setScale(0.5).setInteractive();
 
-    let muteIcon = this.add.sprite(width, 40, 'icons', 'audioOn.png').setOrigin(1, 0).setScale(0.5).setInteractive().setDepth(10);
-    this.add.circle(width, 40, muteIcon.displayWidth / 2, 0x000000).setOrigin(1, 0).setAlpha(0.75).setDepth(0);
+    let muteIcon = this.add.sprite(width, 0, 'icons', 'audioOn.png').setOrigin(1, 0).setScale(0.5).setInteractive().setDepth(10);
+    this.add.circle(width, 0, muteIcon.displayWidth / 2, 0x000000).setOrigin(1, 0).setAlpha(0.75).setDepth(0);
 
     restartIcon.on('pointerdown', this.restartGame, this); //
     this.playIcon.on('pointerdown', this.playGame, this)
@@ -163,11 +178,16 @@ export default class PlayerScene extends Phaser.Scene {
 
   addScoreText() {
     let { width, height } = this.sys.game.canvas;
-    this.scoreText = this.add.bitmapText(width - 20, 20, 'mont', this.scoreToString(0), 36).setOrigin(1, 0.5).setDepth(1001);
+    this.add.image(width / 2, 0, 'score-background').setOrigin(0.5, 0).setDepth(1000);
+    this.scoreText = this.add.bitmapText(width / 2 - 12, 18, 'mont', this.scoreToString(0), 36).setOrigin(0.5).setDepth(1001); // The text needs to be offset to the left slightly to centre it, I don't know why
   }
 
   updateScoreText(score) {
     this.scoreText.text = this.scoreToString(score);
+    // The text does not stay centrally aligned when it is updated
+    // this.scoreText.setOrigin(0.5);
+    // console.log(this.scoreText.x)//width)
+    // this.scoreText.x = this.sys.game.canvas.width / 2 - this.scoreText.width + 12; // - 12;
   }
 
   scoreToString(score) {
@@ -182,7 +202,7 @@ export default class PlayerScene extends Phaser.Scene {
       'particles',
       {
         frame: ['red', 'blue', 'white', 'yellow'],
-        x: width - 20 - this.scoreText.width / 2,
+        x: width / 2,
         y: 20,
         scale: { start: 0.4, end: 0.1 },
         speed: 200,
@@ -204,7 +224,7 @@ export default class PlayerScene extends Phaser.Scene {
       }.bind(this),
       onComplete: function () {
         this.scoreText.setTint(0xffffff);
-        emitter.explode(10, width - 20 - this.scoreText.width / 2, 20);
+        emitter.explode(10, width / 2, 18);
       }.bind(this)
     });
   }
@@ -263,7 +283,7 @@ export default class PlayerScene extends Phaser.Scene {
     let { width, height } = this.sys.game.canvas;
 
     // Set this to be interactive to block interacting with stuff underneath
-    this.pauseScreen = this.add.rectangle(0, 40, width, height - 80, 0x000000).setOrigin(0, 0).setDepth(1000).setInteractive();
+    this.pauseScreen = this.add.rectangle(0, 0, width, height - 40, 0x000000).setOrigin(0, 0).setDepth(1000).setInteractive();
     this.pauseScreen.alpha = 0.6;
 
     this.pauseScreenDetail = this.add.circle(this.centre.x, this.centre.y, 80, 0x000000).setOrigin(0.5).setDepth(1001);
