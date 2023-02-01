@@ -29,6 +29,8 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
+  /* -webkit-box-sizing: border-box;
+  box-sizing: border-box; */
 }
 
 nav ul {
@@ -36,6 +38,10 @@ nav ul {
   margin-left: -245px;
   margin-top: -5px;
   margin-bottom: -5px;
+  /* padding-left: 0px;
+  padding-right: 0px; */
+  /* -webkit-box-sizing: border-box;
+  box-sizing: border-box; */
 }
 
 nav li {
@@ -43,6 +49,10 @@ nav li {
   margin-left: -5px;
   margin-right: -5px;
   position: relative;
+  /* padding-left: 0px;
+  padding-right: 0px; */
+  /* -webkit-box-sizing: border-box;
+  box-sizing: border-box; */
 }
 
 nav li:last-child {
@@ -50,30 +60,49 @@ nav li:last-child {
   right: -195px;
 }
 
-nav a.instructions {
-  background-image: url(assets/images/icons/question.png);
+/* nav a {
+  background-size: 50px 50px;
   width: 50px;
   height: 50px;
   display: block;
+} */
+
+nav a.instructions {
+  background-image: url(assets/images/icons/question.png);
+  background-size: 50px 50px;
+  width: 50px;
+  height: 50px;
+  display: block;
+  /* scale: 0.5; */
+  /* -webkit-box-sizing: border-box;
+  box-sizing: border-box; */
 }
 
 nav a.stats {
   background-image: url(assets/images/icons/star.png);
+  background-size: 50px 50px;
   width: 50px;
   height: 50px;
   display: block;
+  /* scale: 0.5; */
+  /* border-left: 50px; */
+  /* -webkit-box-sizing: border-box;
+  box-sizing: border-box; */
 }
 
 nav a.leaderboard {
   background-image: url(assets/images/icons/leaderboardsComplex.png);
+  background-size: 50px 50px;
   width: 50px;
   height: 50px;
   display: block;
+  /* scale: 0.5; */
 }
 
 .menu {
   cursor: pointer;
   display: block;
+  margin-bottom: 8px;
 }
 
 /* nav a.menu {
@@ -125,15 +154,19 @@ nav a.leaderboard {
 .bar2,
 .bar3 {
   width: 35px;
-  height: 7px;
+  height: 6px;
   background-color: white;
   margin: 6px 0px;
   transition: 0.4s;
+  /* shape-outside: polygon( */
 }
 
 /* Rotate first bar */
 .change .bar1 {
-  transform: translate(0, 12.5px) rotate(-45deg);
+  transform: translate(0, 13.5px) rotate(-45deg);
+  height: 9px;
+  /* margin: 4px 0px; */
+  clip-path: polygon(88% 0%, 100% 50%, 88% 100%, 12% 100%, 0 50%, 12% 0);
 }
 
 /* Fade out the second bar */
@@ -143,7 +176,10 @@ nav a.leaderboard {
 
 /* Rotate last bar */
 .change .bar3 {
-  transform: translate(0, -12.5px) rotate(45deg);
+  transform: translate(0, -13.5px) rotate(45deg);
+  height: 9px;
+  /* margin: 4px 0px; */
+  clip-path: polygon(88% 0%, 100% 50%, 88% 100%, 12% 100%, 0 50%, 12% 0);
 }
 
 .game-instructions {
@@ -159,7 +195,7 @@ nav a.leaderboard {
   margin-left: 20px;
   margin-right: 20px;
   overflow-y: auto;
-  height: 500px;
+  height: 480px;
   /* align-items: center; */
 }
 

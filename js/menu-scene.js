@@ -18,13 +18,13 @@ export default class menuScene extends Phaser.Scene {
     // Make menu background out of pngs
     let backgroundTop = this.add.image(width / 2, 0, 'menu-top').setOrigin(0.5, 0).setScale(imageScale).setInteractive();
     let backgroundMiddle = this.add.image(width / 2, backgroundTop.displayHeight, 'menu-middle').setOrigin(0.5, 0).setScale(imageScale).setInteractive();
-    backgroundMiddle.displayHeight = height - 2 * backgroundTop.displayHeight; // middleHeight;
+    backgroundMiddle.displayHeight = height - 2 * backgroundTop.displayHeight - 40; // middleHeight;
 
     let backgroundBottom = this.add.image(width / 2, backgroundTop.displayHeight + backgroundMiddle.displayHeight, 'menu-top').setOrigin(0.5, 0).setScale(imageScale).setInteractive();
     backgroundBottom.flipY = true;
 
     // Button to return to game
-    let cancelButton = this.add.image(width - 4, 4, 'icons', 'cross.png').setOrigin(1, 0).setScale(0.4).setInteractive();
+    let cancelButton = this.add.image(width - 4, 4, 'icons', 'cross.png').setOrigin(1, 0).setScale(0.4).setInteractive({ cursor: 'pointer' });
     cancelButton.on('pointerdown', () => {
       data.playerScene.scene.resume('MainScene');
       data.playerScene.unBlurScreen();
@@ -46,7 +46,7 @@ export default class menuScene extends Phaser.Scene {
 
     this.setBodyText(data.menuType);
 
-    data.playerScene.addSocialButtons(this, 10);
+    data.playerScene.addSocialButtons(this);
   }
 
   setBodyText(menuType) {

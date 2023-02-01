@@ -52,16 +52,19 @@ export default class PlayerScene extends Phaser.Scene {
 
     // stop from being interactive when menu has been clicked
     // TODO how reliable is this?
-    document.getElementById('menu').addEventListener('click', function () {
-      var x = document.getElementById("menu-items");
-      if (x.style.display === "block") {
-        this.scene.pause();
-        this.pauseGame();
-      } else {
-        this.scene.resume();
-        this.resumeGame()
-      }
-    }.bind(this));
+    document.getElementById('menu').addEventListener('click', () =>
+      this.dropDownMenu()
+    );
+    // document.getElementById('menu').addEventListener('click', function () {
+    //   var x = document.getElementById("menu-items");
+    //   if (x.style.display === "block") {
+    //     this.scene.pause();
+    //     this.pauseGame();
+    //   } else {
+    //     this.scene.resume();
+    //     this.resumeGame()
+    //   }
+    // }.bind(this));
 
     this.addMenuBars();
     this.pauseGame();
@@ -100,16 +103,6 @@ export default class PlayerScene extends Phaser.Scene {
 
   addMenuBars() {
     let { width, height } = this.sys.game.canvas;
-
-    // this.add.rectangle(0, 0, width, 40, 0x000000).setOrigin(0, 0);
-
-    // let howToPlayIcon = this.add.image(0, 20, 'icons', 'question.png').setOrigin(0, 0.5).setScale(0.5).setInteractive();
-    // let scoreIcon = this.add.image(40, 20, 'icons', 'star.png').setOrigin(0, 0.5).setScale(0.5).setInteractive();
-    // let highScoresIcon = this.add.image(80, 20, 'icons', 'leaderboardsComplex.png').setOrigin(0, 0.5).setScale(0.5).setInteractive();
-
-    // scoreIcon.on('pointerdown', () => this.launchMenuScene('MenuScene', 'stats'));
-    // howToPlayIcon.on('pointerdown', () => this.launchMenuScene('MenuScene', 'how_to_play'));
-    // highScoresIcon.on('pointerdown', () => this.launchMenuScene('MenuScene', 'high_scores'));
 
     this.add.rectangle(0, height - 40, width, 40, 0x000000).setOrigin(0, 0);
     let restartIcon = this.add.image(0, height - 20, 'icons', 'return.png').setOrigin(0, 0.5).setScale(0.5).setInteractive({ cursor: 'pointer' });
@@ -231,7 +224,21 @@ export default class PlayerScene extends Phaser.Scene {
     this.scene.launch(sceneName, { playerScene: this, menuType: menuType, wasPaused: this.gamePaused });
 
     if (!this.gamePaused) this.pauseGame();
-    this.blurScreen();
+    // this.blurScreen();
+  }
+
+  dropDownMenu() {
+    var x = document.getElementById('menu-items');
+    if (x.style.display === 'block') {
+      // Only pause the game if it wasn't already paused
+      if (!this.gamePaused) {
+        this.scene.pause();
+        this.pauseGame();
+      }
+    } else {
+      this.scene.resume();
+      this.resumeGame()
+    }
   }
 
   blurScreen() {
@@ -258,17 +265,18 @@ export default class PlayerScene extends Phaser.Scene {
   }
 
   playGame() {
-    // When the menu is being displayed don't change the state of the game
-    if (!this.scene.isActive('MenuScene')) {
-      if (!this.songComplete) {
-        if (this.gamePaused) {
-          this.resumeGame();
-        } else {
-          this.pauseGame();
-        }
+    // Stop the menu scene if it is running
+    if (this.scene.isActive('MenuScene')) {
+      this.scene.stop('MenuScene');
+    }
+    if (!this.songComplete) {
+      if (this.gamePaused) {
+        this.resumeGame();
       } else {
-        this.restartGame();
+        this.pauseGame();
       }
+    } else {
+      this.restartGame();
     }
   }
 
@@ -306,6 +314,51 @@ export default class PlayerScene extends Phaser.Scene {
         this.playButton.on('pointerdown', this.resumeGame, this);
       }
     }
+  }
+
+  resumeGame() {
+    if (this.sceneLoaded) {
+      this.playIcon.setTexture('icons', 'pause.png');
+
+      this.gamePaused = false;
+      this.gameScene.scene.resume();
+      this.gameScene.resumeGame();
+
+      this.pauseScreen.destroy();
+      this.pauseScreenDetail.destroy();
+      this.playButton.destroy();
+      this.pauseText.destroy();
+      if (this.songComplete) {
+        this.victoryText.destroy();
+        if (this.nameform) {
+          this.nameform.destroy()
+        }
+      }
+
+      this.instagramButton.destroy();
+      this.twitterButton.destroy();
+      this.spotifyButton.destroy();
+    }
+  }
+
+  restartGame() {
+    // Close the menu if it is being displayed
+    if (this.scene.isActive('MenuScene')) {
+      this.scene.stop('MenuScene');
+    }
+    if (this.sceneLoaded) {
+      if (this.gamePaused) this.resumeGame();
+      this.gameScene.song.stop();
+      this.songComplete = false;
+      const muteSong = !(this.gameScene.song.volume > 0);
+      this.gameScene.scene.restart({ pauseAtStart: false, muteSong: muteSong });
+      this.updateScoreText(0);
+    }
+  }
+
+  async endGame() {
+    this.songComplete = true;
+    this.pauseGame();
   }
 
   async gameOverText(scoreId) {
@@ -381,45 +434,7 @@ export default class PlayerScene extends Phaser.Scene {
         }
       }
     }.bind(this))
-    //           var userData = {
-    //             name: inputText.value,
-    //             score: data.score
-    //           }; 
-    //           this.submitScore(userData).then(function(data) {
-    //             this.restartGame();
-    //           }.bind(this)).catch(function(err) {
-    //             console.log(err);
-    //           });
-    //         }
-    //       }.bind(this)).catch(function(err) {
-    //         console.log(err)
-    //       });
-    //     }
-    //   }
-
-    //   if (event.target.name === 'skipButton') {
-    //     this.restartGame();
-    //   }     
-
-    // }.bind(this));
   }
-
-  //   function get(url, data) {
-  //   return new Promise(function (resolve, reject) {
-  //     $.ajax({
-  //       type: 'GET',
-  //       url: url,
-  //       data: data,
-  //       success: function (response) {
-  //         resolve(response);
-  //       },
-  //       error: function (error) {
-  //         reject(error);
-  //       }
-  //     })
-  //   });
-  // }
-
 
   profanityTest(text) {
     return get('/profanity-test', { text: text });
@@ -474,51 +489,6 @@ export default class PlayerScene extends Phaser.Scene {
     } else if (!s) {
       window.location.href = url;
     }
-  }
-
-  resumeGame() {
-    if (this.sceneLoaded) {
-      this.playIcon.setTexture('icons', 'pause.png');
-
-      this.gamePaused = false;
-      this.gameScene.scene.resume();
-      this.gameScene.resumeGame();
-
-      this.pauseScreen.destroy();
-      this.pauseScreenDetail.destroy();
-      this.playButton.destroy();
-      this.pauseText.destroy();
-      if (this.songComplete) {
-        this.victoryText.destroy();
-        if (this.nameform) {
-          this.nameform.destroy()
-        }
-      }
-
-      this.instagramButton.destroy();
-      this.twitterButton.destroy();
-      this.spotifyButton.destroy();
-    }
-  }
-
-  restartGame() {
-    if (this.sceneLoaded) {
-      if (this.gamePaused) this.resumeGame();
-      this.gameScene.song.stop();
-      this.songComplete = false;
-      const muteSong = !(this.gameScene.song.volume > 0);
-      this.gameScene.scene.restart({ pauseAtStart: false, muteSong: muteSong });
-      this.updateScoreText(0);
-    }
-  }
-
-  async endGame() {
-    this.songComplete = true;
-    this.pauseGame();
-
-    // getHighScores().then(response => console.log(response));
-
-    // if total score in this range add popup to enter details
   }
 
   async saveScore(score) {
