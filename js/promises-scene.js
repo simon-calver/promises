@@ -33,7 +33,7 @@ export default class PromisesScene extends Phaser.Scene {
   }
 
   create(params = { 'pauseAtStart': true, 'muteSong': false, 'firstGame': false }) {
-    this.input.setDefaultCursor('url(assets/cursors/hand.cur), pointer');
+    // this.input.setDefaultCursor('url(assets/cursors/hand.cur), pointer');
 
     // I don't want the canvas to fill the screen on desktop, so set default size. This should only affect the 
     // aspect ratio since it is using scale.FIT
@@ -201,7 +201,7 @@ export default class PromisesScene extends Phaser.Scene {
 
     this.canDrag = true;
     this.input.on('dragstart', function (pointer, obj) {
-      this.input.setDefaultCursor('url(assets/cursors/hand-dark.cur), pointer');
+      // this.input.setDefaultCursor('url(assets/cursors/hand-dark.cur), pointer');
       this.canDrag = true; //  A bit of a crappy way of stopping during drag etc
       obj.parent.pauseUpdate();
       obj.parent.updateSeparations(obj);
@@ -221,7 +221,7 @@ export default class PromisesScene extends Phaser.Scene {
       }
     }, this);
     this.input.on('dragend', function (pointer, obj) {
-      this.input.setDefaultCursor('url(assets/cursors/hand.cur), pointer');
+      // this.input.setDefaultCursor('url(assets/cursors/hand.cur), pointer');
       obj.parent.unpauseUpdate();
       obj.parent.calculateDirection();
     }, this);

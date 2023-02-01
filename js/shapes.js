@@ -4,7 +4,7 @@ const SHAPE_COLOURS_HEX_DARK = [0x313977, 0x772c41, 0x848484, 0x7e713d];
 class MysteriousShape extends Phaser.GameObjects.Polygon {
   constructor(scene, points, id, fadeIn) {
     // TODO: Set depth of main shape 
-    super(scene, 0, 0, points, SHAPE_COLOURS_HEX[id], 1.0).setInteractive().setOrigin(0.5).setScale(0.01); //.setAlpha(0)
+    super(scene, 0, 0, points, SHAPE_COLOURS_HEX[id], 1.0).setInteractive({ cursor: 'pointer' }).setOrigin(0.5).setScale(0.01); //.setAlpha(0)
     scene.add.existing(this);
     scene.physics.add.existing(this);
 
