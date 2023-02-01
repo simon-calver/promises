@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="score-background.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="true"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:zoom="1.2810466"
+     inkscape:cx="262.67585"
+     inkscape:cy="265.7983"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath1948">
+      <rect
+         style="opacity:1;fill:#000000;fill-opacity:0.5;stroke:none;stroke-width:3.5292;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+         id="rect1950"
+         width="119.84573"
+         height="39.431774"
+         x="-86.284035"
+         y="36.738518" />
+    </clipPath>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:1;fill:#000000;fill-opacity:0.5;stroke-width:0.264999;stroke-linecap:round;stroke-linejoin:round"
+       id="rect846"
+       width="100.78999"
+       height="39.655075"
+       x="51.30061"
+       y="26.223366" />
+    <rect
+       style="opacity:1;fill:#000000;fill-opacity:0.5;stroke-width:0.334329;stroke-linecap:round;stroke-linejoin:round"
+       id="rect1274"
+       width="73.538055"
+       height="86.509033"
+       x="64.926575"
+       y="3.9940794" />
+    <g
+       id="g1842"
+       clip-path="url(#clipPath1948)"
+       inkscape:export-filename="C:\Users\simon\Desktop\my git repositories\phaser-host\server\public\promises\assets\images\backgrounds\score-background.png"
+       inkscape:export-xdpi="32.452419"
+       inkscape:export-ydpi="32.452419">
+      <path
+         style="fill:#000000;fill-opacity:0.5;stroke:none;stroke-width:1.61766;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m -74.29691,36.738517 19.111973,27.67949 H 7.38109 L 26.49307,36.738517 H -74.29691"
+         id="path1389" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:3.70416668;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m -74.29691,36.738507 19.111973,27.6795 H 7.3811 l 19.11198,-27.6795"
+         id="path1686" />
+    </g>
+  </g>
+</svg>
