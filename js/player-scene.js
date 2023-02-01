@@ -179,19 +179,15 @@ export default class PlayerScene extends Phaser.Scene {
   addScoreText() {
     let { width, height } = this.sys.game.canvas;
     this.add.image(width / 2, 0, 'score-background').setOrigin(0.5, 0).setDepth(1000);
-    this.scoreText = this.add.bitmapText(width / 2 - 12, 18, 'mont', this.scoreToString(0), 36).setOrigin(0.5).setDepth(1001); // The text needs to be offset to the left slightly to centre it, I don't know why
+    this.scoreText = this.add.bitmapText(width / 2, 18, 'mont', 0, 36).setOrigin(0.5).setDepth(1001);
   }
 
   updateScoreText(score) {
     this.scoreText.text = this.scoreToString(score);
-    // The text does not stay centrally aligned when it is updated
-    // this.scoreText.setOrigin(0.5);
-    // console.log(this.scoreText.x)//width)
-    // this.scoreText.x = this.sys.game.canvas.width / 2 - this.scoreText.width + 12; // - 12;
   }
 
   scoreToString(score) {
-    return Phaser.Utils.String.Pad(Math.round(score), 4, ' ', 1);  //use deil or round ? and why abs?
+    return Math.round(score);
   }
 
   updateGameScore(oldScore, newScore, textColour) {
