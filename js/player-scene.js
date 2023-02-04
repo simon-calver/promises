@@ -52,9 +52,9 @@ export default class PlayerScene extends Phaser.Scene {
 
     // stop from being interactive when menu has been clicked
     // TODO how reliable is this?
-    document.getElementById('menu').addEventListener('click', () =>
-      this.dropDownMenu()
-    );
+    // document.getElementById('menu').addEventListener('click', () =>
+    //   this.dropDownMenu()
+    // );
     // document.getElementById('menu').addEventListener('click', function () {
     //   var x = document.getElementById("menu-items");
     //   if (x.style.display === "block") {
@@ -221,7 +221,15 @@ export default class PlayerScene extends Phaser.Scene {
   launchMenuScene(sceneName, menuType) {
     // Make other HTML elements invisible
     if (this.nameform) this.nameform.setVisible(false);
-    this.scene.launch(sceneName, { playerScene: this, menuType: menuType, wasPaused: this.gamePaused });
+
+    // If menu scene is already running use pasuse status from that
+    let wasPaused;
+    if (this.scene.isActive('MenuScene')) {
+      wasPaused = this.scene.get('MenuScene').wasPaused;
+    } else {
+      wasPaused = this.gamePaused;
+    }
+    this.scene.launch(sceneName, { playerScene: this, menuType: menuType, wasPaused: wasPaused });
 
     if (!this.gamePaused) this.pauseGame();
     // this.blurScreen();

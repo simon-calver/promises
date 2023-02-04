@@ -72,13 +72,45 @@
 
     <script type="text/javascript">
       // Close the dropdown if the user clicks outside of it
-      // window.onclick = function (event) {
+      window.onmousedown = function (event) {
+        // This seems a bit clunky
+        if (!event.target.matches('div.bar1') && !event.target.matches('div.bar2') && !event.target.matches('div.bar3') && !event.target.matches('#menu') && !event.target.matches('div#menu-items') && !event.target.matches('div#menu-items a') && !event.target.matches('div#menu-items div') && !event.target.matches('div#menu-items div a')) {
+          // Only change the menu if it is open
+          if (document.getElementById("menu-items").style.display === "block") {
+            var menu = document.getElementById("menu");
+            displayMenu(menu);
+          }
+        }
+      }
+      // window.ondragstart = function (event) {
       //   console.log(event.target)
-      //   if (!event.target.matches('a')) {
-      //     var menu = document.getElementById("menu-items");
-      //     displayMenu(menu);
-      //     console.log("close")
+      // };
+      // window.oncli
+      // window.onclick = function (event) {
+      //   // console.log(event.target)
+
+      //   // if (event.target.matches('canvas') || event.target.matches('nav') || event.target.matches('div#phaser-app') || event.target.matches('a')) {
+      //   //   if (document.getElementById("menu-items").style.display === "block") {
+      //   //     var menu = document.getElementById("menu");
+      //   //     displayMenu(menu);
+      //   //     console.log("close")
+      //   //   }
+      //   // }
+
+      //   
+      //   if (!event.target.matches('div.bar1') && !event.target.matches('div.bar2') && !event.target.matches('div.bar3') && !event.target.matches('#menu') && !event.target.matches('div#menu-items') && !event.target.matches('div#menu-items a') && !event.target.matches('div#menu-items div') && !event.target.matches('div#menu-items div a')) {
+      //     // Only change the menu if it is open
+      //     if (document.getElementById("menu-items").style.display === "block") {
+      //       var menu = document.getElementById("menu");
+      //       displayMenu(menu);
+      //       console.log("close")
+      //     }
       //   }
+      //   //   // var menu = document.getElementById("menu");
+      //   //   // displayMenu(menu);
+      //   //   // console.log("close")
+      //   // }
+      // } 
       //   //   var dropdowns = document.getElementsByClassName("dropdown-content");
       //   //   var i;
       //   //   for (i = 0; i < dropdowns.length; i++) {

@@ -12,6 +12,8 @@ export default class menuScene extends Phaser.Scene {
   create(data = { playerScene: Phaser, menuType: String, wasPaused: Boolean }) {
     let { width, height } = this.sys.game.canvas;
 
+    this.wasPaused = data.wasPaused;
+
     let imageWidth = this.textures.get('menu-top').getSourceImage().width;
     let imageScale = width / imageWidth;
 

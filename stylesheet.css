@@ -67,6 +67,38 @@ nav li:last-child {
   display: block;
 } */
 
+nav li.instructions {
+  background-image: url(assets/images/icons/question.png);
+  background-size: 50px 50px;
+  width: 50px;
+  height: 50px;
+  display: block;
+  /* scale: 0.5; */
+  /* -webkit-box-sizing: border-box;
+  box-sizing: border-box; */
+}
+
+nav li.stats {
+  background-image: url(assets/images/icons/star.png);
+  background-size: 50px 50px;
+  width: 50px;
+  height: 50px;
+  display: block;
+  /* scale: 0.5; */
+  /* border-left: 50px; */
+  /* -webkit-box-sizing: border-box;
+  box-sizing: border-box; */
+}
+
+nav li.leaderboard {
+  background-image: url(assets/images/icons/leaderboardsComplex.png);
+  background-size: 50px 50px;
+  width: 50px;
+  height: 50px;
+  display: block;
+  /* scale: 0.5; */
+}
+
 nav a.instructions {
   background-image: url(assets/images/icons/question.png);
   background-size: 50px 50px;
