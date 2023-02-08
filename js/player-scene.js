@@ -38,7 +38,7 @@ export default class PlayerScene extends Phaser.Scene {
 
     // Stop sound pausing when loose focus, will this work for all OS?
     this.sound.pauseOnBlur = false;
-
+    this.sound.unlock();//???????????????????????????????? To fix IoS error?
 
     document.getElementById('instructions').addEventListener('click', () =>
       this.launchMenuScene('MenuScene', 'how_to_play')
