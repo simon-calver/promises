@@ -44,7 +44,7 @@ export default class menuScene extends Phaser.Scene {
     let title = titleWords.map((word) => {
       return (word.length > 2) ? (word[0].toUpperCase() + word.substring(1)) : (word);
     }).join(' ');
-    this.add.bitmapText(width / 2, height / 10, 'mont', title, 36).setOrigin(0.5, 0);
+    this.add.bitmapText(width / 2, 40, 'mont', title, 36).setOrigin(0.5, 0);
 
     this.setBodyText(data.menuType);
 
@@ -53,25 +53,26 @@ export default class menuScene extends Phaser.Scene {
 
   setBodyText(menuType) {
     let { width, height } = this.sys.game.canvas;
+    console.log(height)
     let lineHeight = 100;
     switch (menuType) {
       case 'how_to_play':
-        this.add.dom(width / 2, 120).createFromCache('instructions').setOrigin(0.5, 0);
+        this.add.dom(width / 2, 100).createFromCache('instructions').setOrigin(0.5, 0);
         break;
       case 'stats':
-        this.gamesPlayedText = this.add.bitmapText(width / 2, height / 5 + lineHeight, 'mont', this.getGamesPlayedText(0), 30).setOrigin(0.5);
+        this.gamesPlayedText = this.add.bitmapText(width / 2, 80 + lineHeight, 'mont', this.getGamesPlayedText(0), 30).setOrigin(0.5);
         this.gamesPlayedText.setCenterAlign();
 
-        this.avgScoreText = this.add.bitmapText(width / 2, height / 5 + 2 * lineHeight, 'mont', this.getAvgScoreText(0), 30).setOrigin(0.5);
+        this.avgScoreText = this.add.bitmapText(width / 2, 80 + 2 * lineHeight, 'mont', this.getAvgScoreText(0), 30).setOrigin(0.5);
         this.avgScoreText.setCenterAlign();
 
-        this.highScoreText = this.add.bitmapText(width / 2, height / 5 + 3 * lineHeight, 'mont', this.getHighScoreText(0), 30).setOrigin(0.5);
+        this.highScoreText = this.add.bitmapText(width / 2, 80 + 3 * lineHeight, 'mont', this.getHighScoreText(0), 30).setOrigin(0.5);
         this.highScoreText.setCenterAlign();
 
         this.displayScores();
         break;
       case 'high_scores':
-        this.add.dom(width / 2, 120).createFromCache('high-scores').setOrigin(0.5, 0);
+        this.add.dom(width / 2, 100).createFromCache('high-scores').setOrigin(0.5, 0);
       default:
         break;
     }
